@@ -113,12 +113,9 @@ def train(discriminator_model, discriminator_optimizer, discriminator_loss_fn, g
         discriminator_output = discriminator_model(data)
         discriminator_loss = discriminator_loss_fn(discriminator_output, torch.ones(batch_size,1))
         discriminator_loss.backward()
-        generator_optimizer.zero_grad()
+        
         generator_output = generator_model(create_identity(batch_size))
         discriminator_output = discriminator_model(generator_output)
-        generator_loss = generator_loss_fn(discriminator_output, torch.ones(batch_size,1))
-        generator_loss.backward()
-        generator_optimizer.step()
         discriminator_loss = discriminator_loss_fn(discriminator_output, torch.zeros(batch_size,1))
         discriminator_loss.backward()
         discriminator_optimizer.step()
@@ -128,14 +125,14 @@ def train(discriminator_model, discriminator_optimizer, discriminator_loss_fn, g
         img = img.detach().numpy()[0,0,:,:]
         img = img.astype(np.uint8)
         
-        '''discriminator_optimizer.zero_grad()
+        discriminator_optimizer.zero_grad()
         generator_optimizer.zero_grad()
         generator_model.zero_grad()
         generator_output = generator_model(create_identity(batch_size))
         discriminator_output = discriminator_model(generator_output)
         generator_loss = generator_loss_fn(discriminator_output, torch.ones(batch_size,1))
         generator_loss.backward()
-        generator_optimizer.step()'''
+        generator_optimizer.step()
         
         
         
