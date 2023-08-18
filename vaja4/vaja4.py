@@ -145,7 +145,7 @@ def train(discriminator_model, discriminator_optimizer, discriminator_loss_fn, g
             discriminator_loss_sum = 0
             cv2.imwrite("img"+str(epoch)+".png",img)
     
-    
+
 disc_model = Discriminator()
 disc_optim = torch.optim.Adam(disc_model.parameters(), lr=0.0002, betas=(0.5, 0.999))
 disc_loss_fn = nn.BCELoss()
